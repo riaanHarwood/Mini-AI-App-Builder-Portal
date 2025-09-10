@@ -80,8 +80,8 @@ Generated Mock UI:
 #
 **Project Structure**
 
-_I've designed the project structure to separate responsibilities for clarity and efficiency. The frontend, built with React, focuses on displaying the AI-driven interface, while the backend handles API requests, database operations, and AI processing to keep everything running smoothly
-_
+*I've designed the project structure to separate responsibilities for clarity and efficiency. The frontend, built with React, focuses on displaying the AI-driven interface, while the backend handles API requests, database operations, and AI processing to keep everything running smoothly*
+
 ```
 /client
   ├── src
