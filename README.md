@@ -41,7 +41,8 @@ The following example if from the PDF provided to me by Decoded hiring team
 ```css
 I want an app to manage student courses and grades. Teachers add courses, students enrol, and admins manage reports.
 ```
-*Result*
+*Result*: 
+
 AI Captured Requirements:
 
 + App Name: **Course Manager**
