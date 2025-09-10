@@ -34,8 +34,9 @@ This project showcases my ability to implement AI-driven requirement gathering a
 + Non-functional mock UI (for demonstration purposes only).
 
 
-
+#
 **Example**
+#
 The following example if from the PDF provided to me by Decoded hiring team
 ```css
 I want an app to manage student courses and grades. Teachers add courses, students enrol, and admins manage reports.
