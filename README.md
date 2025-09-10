@@ -79,6 +79,9 @@ Generated Mock UI:
 
 #
 **Project Structure**
+
+The project is organized into a client (frontend) and server (backend). The client handles the React interface and AI-driven requirement display, while the server manages API requests, database interactions, and AI integration.
+
 ```
 /client
   ├── src
