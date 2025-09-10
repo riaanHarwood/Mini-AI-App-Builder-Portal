@@ -66,8 +66,7 @@ Generated Mock UI:
  
 
 #
-**Tech Stack
-**
+**Tech Stack**
 + Frontend: **React**
 
 + Backend: **Node.js **(deployed on Render)
@@ -78,7 +77,7 @@ Generated Mock UI:
 
 
 #
-Project Structure
+**Project Structure**
 ```
 /client
   ├── src
