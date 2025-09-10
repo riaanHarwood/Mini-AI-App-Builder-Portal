@@ -66,18 +66,19 @@ Generated Mock UI:
  
 
 #
-Tech Stack
-
+**Tech Stack
+**
 + Frontend: **React**
 
 + Backend: **Node.js **(deployed on Render)
 
 + Database: **MongoDB** (Cloud instance)
 
-AI Integration: **AI API for requirement extraction (API Key required)**
++ AI Integration: **AI API for requirement extraction (API Key required)**
 
 
-
+#
+Project Structure
 ```
 /client
   ├── src
