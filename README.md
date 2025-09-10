@@ -64,3 +64,29 @@ Generated Mock UI:
 
   + **Grade** → Student, Course, Grade
  
+
+#
+Tech Stack
+
++ Frontend: **React**
+
++ Backend: **Node.js **(deployed on Render)
+
++ Database: **MongoDB** (Cloud instance)
+
+AI Integration: **AI API for requirement extraction (API Key required)**
+
+
+
+```
+/client
+  ├── src
+  │   ├── components   # React components
+  │   ├── pages        # Page views
+  │   ├── services     # API integration
+  │   └── App.js       # Main React app entry
+/server
+  ├── routes           # Backend routes
+  ├── models           # MongoDB schema definitions
+  └── index.js         # Express server entry
+```
