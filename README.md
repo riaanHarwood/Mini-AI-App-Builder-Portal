@@ -69,7 +69,7 @@ Generated Mock UI:
 **Tech Stack**
 + Frontend: **React**
 
-+ Backend: **Node.js **(deployed on Render)
++ Backend: **Node.js** (deployed on Render)
 
 + Database: **MongoDB** (Cloud instance)
 
