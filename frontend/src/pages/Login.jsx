@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function Login({ onLogin }) {
@@ -29,6 +30,11 @@ export default function Login({ onLogin }) {
         <button className="w-full py-2 bg-orange-600 hover:bg-orange-700 rounded text-white font-semibold">
           Login
         </button>
+
+        <div className="flex justify-between text-sm text-orange-300 pt-2">
+          <Link to="/register" className="hover:underline">Create account</Link>
+          <Link to="/forgot-password" className="hover:underline">Forgot password?</Link>
+        </div>
       </form>
     </div>
   );
