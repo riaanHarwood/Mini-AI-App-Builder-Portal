@@ -13,7 +13,7 @@ export default function Register() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      alert("Passwords do not match. Please try again");
       return;
     }
 
@@ -59,7 +59,7 @@ export default function Register() {
         <input
           className="w-full p-2 rounded bg-neutral-800 text-white"
           placeholder="Confirm Password"
-          type="password"
+          type="confirmPassword"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />

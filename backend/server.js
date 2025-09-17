@@ -22,7 +22,7 @@ const User = mongoose.model("User", userSchema);
 
 // Register
 app.post("/api/register", async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password, confirmPassword } = req.body;
   const hashed = await bcrypt.hash(password, 10);
   await User.create({ email, password: hashed });
   res.sendStatus(201);
