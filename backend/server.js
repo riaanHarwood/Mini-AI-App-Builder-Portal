@@ -29,6 +29,12 @@ app.post("/api/register", async (req, res) => {
     if (password !== confirmPassword) {
       return res.status(400).json({ error: "Passwords do not match" });
     }
+    
+    // Checks if email already in use 
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: "Email is already registered" });
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
