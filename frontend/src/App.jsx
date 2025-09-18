@@ -3,14 +3,8 @@ import { useState } from "react";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
+import Chat from "./pages/Chat";
 
-function Chat() {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-neutral-900 to-orange-800 flex items-center justify-center text-white">
-      <h1 className="text-4xl">Welcome to the Mini AI Chat!</h1>
-    </div>
-  );
-}
 
 function App() {
   const [isAuth, setIsAuth] = useState(!!localStorage.getItem("token"));
