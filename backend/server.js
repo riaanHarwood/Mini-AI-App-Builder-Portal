@@ -16,19 +16,35 @@ mongoose.connect(process.env.MONGO_URI);
 // Schema
 const userSchema = new mongoose.Schema({
   email: String,
-  password: String
+  password: String, 
 });
 const User = mongoose.model("User", userSchema);
 
-// Register
+// Register form
 app.post("/api/register", async (req, res) => {
-  const { name, email, password, confirmPassword } = req.body;
-  const hashed = await bcrypt.hash(password, 10);
-  await User.create({ email, password: hashed });
-  res.sendStatus(201);
+  try {
+    const { name, email, password, confirmPassword } = req.body;
+
+    // Checks if password and confirmPassword match 
+    if (password !== confirmPassword) {
+      return res.status(400).json({ error: "Passwords do not match" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // save the hashed password for security
+    await User.create({ name, email, password: hashedPassword });
+
+    res.sendStatus(201);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
+
 // Login
+//Inputs: Email and Password 
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });

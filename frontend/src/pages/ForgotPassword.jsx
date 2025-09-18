@@ -13,7 +13,11 @@ export default function ForgotPassword() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-neutral-900 to-orange-800">
-      <form onSubmit={handleSubmit} className="bg-black/50 p-8 rounded-xl shadow-lg space-y-6 w-full max-w-sm">
+      <form 
+          onSubmit={handleSubmit} 
+          className="bg-black/50 p-8 rounded-xl shadow-lg space-y-6 w-full max-w-sm 
+                    border border-gray-500"
+        >
         <h1 className="text-2xl text-center text-orange-400">Reset Password</h1>
         <input 
           className="w-full p-2 rounded bg-neutral-800 text-white"
@@ -22,7 +26,7 @@ export default function ForgotPassword() {
           Send Reset Link
         </button>
 
-        {/* Back Button */}
+        {/* Back Button - I've implemented this for both the Registration form and ForgotPassword page*/}
         <button
           type="button"
           onClick={() => navigate("/login")}
