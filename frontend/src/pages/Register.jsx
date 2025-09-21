@@ -16,13 +16,25 @@ export default function Register() {
       alert("Passwords do not match. Please try again");
       return;
     }
+    //check for empty field, if so, then ask to fill in all fields. 
+    if (!name || !email || !password || !confirmPassword) {
+      alert("Please fill in all fields");
+      return;
+    }
+    //Check if email is valid/invalid 
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email");
+      return;
+    }
 
     try {
-      await axios.post("http://localhost:5050/api/register", { name, email, password , confirmPassword});
+      await axios.post("http://localhost:5050/api/register", { name, email, password, confirmPassword });
       alert("Registered successfully! You can now log in.");
       navigate("/login");
-    } catch (err) {
-      alert("Registration failed");
+    } 
+    catch (err) {
+      alert(err.response?.data?.error || "Registration failed");
       console.error(err);
     }
   };
@@ -68,6 +80,8 @@ export default function Register() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
+
+        
 
 
         <button className="w-full py-2 bg-orange-600 hover:bg-orange-700 rounded text-white font-semibold">

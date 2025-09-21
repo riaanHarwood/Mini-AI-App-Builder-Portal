@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Login({ onLogin }) {
+  const navigate = useNavigate(); // <-- added
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,36 +11,56 @@ export default function Login({ onLogin }) {
     e.preventDefault();
     try {
       const res = await axios.post("http://localhost:5050/api/login", { email, password });
+
+      // Save token
       localStorage.setItem("token", res.data.token);
       onLogin();
+
+      // After user is logged in, the app will Redirect them to the chat
+      navigate("/"); // <-- connects App.jsx route
     } catch (err) {
-      alert("Login failed");
+      alert(err.response?.data?.error || "Login failed");
+      console.error(err);
     }
   };
 
   return (      
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-neutral-900 to-orange-800">
-      <form 
+      <div className="flex flex-col items-center space-y-6 w-full max-w-sm">
+        {/* Title */}
+        <h1 className="text-4xl font-bold text-white">DECODED AI</h1>
+        {/* Login form */}
+        <form 
           onSubmit={handleSubmit} 
-          className="bg-black/50 p-8 rounded-xl shadow-lg space-y-6 w-full max-w-sm 
-                    border border-gray-500"
+          className="bg-black/50 p-8 rounded-xl shadow-lg space-y-6 w-full border border-gray-500"
         >
-        <h1 className="text-2xl text-center text-orange-400">Login</h1>
-        <input 
-          className="w-full p-2 rounded bg-neutral-800 text-white"
-          placeholder="Email" type="email" value={email} onChange={e=>setEmail(e.target.value)} />
-        <input 
-          className="w-full p-2 rounded bg-neutral-800 text-white"
-          placeholder="Password" type="password" value={password} onChange={e=>setPassword(e.target.value)} />
-        <button className="w-full py-2 bg-orange-600 hover:bg-orange-700 rounded text-white font-semibold">
-          Login
-        </button>
+          <h2 className="text-2xl text-center text-orange-400">Login</h2>
 
-        <div className="flex justify-between text-sm text-orange-300 pt-2">
-          <Link to="/register" className="hover:underline">Create account</Link>
-          <Link to="/forgot-password" className="hover:underline">Forgot password?</Link>
-        </div>
-      </form>
+          <input 
+            className="w-full p-2 rounded bg-neutral-800 text-white"
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+          <input 
+            className="w-full p-2 rounded bg-neutral-800 text-white"
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+
+          <button className="w-full py-2 bg-orange-600 hover:bg-orange-700 rounded text-white font-semibold">
+            Login
+          </button>
+
+          <div className="flex justify-between text-sm text-orange-300 pt-2">
+            <Link to="/register" className="hover:underline">Create account</Link>
+            <Link to="/forgot-password" className="hover:underline">Forgot password?</Link>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={isAuth ? <Chat /> : <Navigate to="/login" />} />
+        <Route path="/" element={isAuth ? <Chat /> : <Navigate to="/chat" />} />
         <Route path="/login" element={<Login onLogin={() => setIsAuth(true)} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
