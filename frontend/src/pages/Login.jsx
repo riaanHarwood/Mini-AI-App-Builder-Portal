@@ -14,21 +14,26 @@ export default function Login({ onLogin }) {
 
       // Save token
       localStorage.setItem("token", res.data.token);
-      onLogin();
 
-      // After user is logged in, the app will Redirect them to the chat
-      navigate("/"); // <-- connects App.jsx route
+      // Save username
+      if (res.data.user?.name) {
+        localStorage.setItem("username", res.data.user.name);
+      }
+
+      onLogin();
+      navigate("/"); // Redirect to chat
     } catch (err) {
       alert(err.response?.data?.error || "Login failed");
       console.error(err);
     }
   };
 
+
   return (      
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-neutral-900 to-orange-800">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-neutral-1000 to-orange-800">
       <div className="flex flex-col items-center space-y-6 w-full max-w-sm">
         {/* Title */}
-        <h1 className="text-4xl font-bold text-white">DECODED AI</h1>
+        <h1 className="text-4xl font-bold text-white">AI App Builder Portal</h1>
         {/* Login form */}
         <form 
           onSubmit={handleSubmit} 
