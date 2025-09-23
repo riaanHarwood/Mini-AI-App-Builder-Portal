@@ -122,3 +122,26 @@ npm install
 cd ../server
 npm install
 ```
+
+**Run the App**
+Start the backend server: 
+```
+cd server
+npm run dev
+```
+
+Start the frontend 
+```
+cd client
+npm start
+```
+
+The app should now be running at:
+```
+Frontend: http://localhost:3000
+Backend: http://localhost:5050
+```
+
+#
+📜 **License**
+This project is licensed under the MIT License.
