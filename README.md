@@ -74,7 +74,9 @@ Generated Mock UI:
 
 + Database: **MongoDB** (Cloud instance)
 
-+ AI Integration: **AI API for requirement extraction (API Key required)**
++ Backend/API testing: **Postman**
+
++ AI Integration: **OpenAI GPT4o + DALL·E for requirement extraction (API Key required)**
 
 
 #
@@ -141,6 +143,12 @@ The app should now be running at:
 Frontend: http://localhost:3000
 Backend: http://localhost:5050
 ```
+
+**Future Improvements**
++ Add authentication & role-based access.
++ Improve AI prompt engineering for more accurate requirement extraction.
++ Deploy frontend to Vercel/Netlify/Gitgub Pages.
+
 
 #
 📜 **License**
