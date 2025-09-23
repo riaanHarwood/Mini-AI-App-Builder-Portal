@@ -83,15 +83,42 @@ Generated Mock UI:
 *I've designed the project structure to separate responsibilities for clarity and efficiency. The frontend, built with React, focuses on displaying the AI-driven interface, while the backend handles API requests, database operations, and AI processing to keep everything running smoothly*
 
 ```
-/client
+/backend
   ├── src
+  │   ├── .env         #store API and Database keys 
   │   ├── components   # React components
-  │   ├── pages        # Page views
   │   ├── services     # API integration
+  │   ├── aiRouter     # Manages AI API from OpenAI GPT4o 
   │   └── App.js       # Main React app entry
-/server
+/frontend
   ├── routes           # Backend routes
+  ├── pages             # Page views
   ├── models           # MongoDB schema definitions
   └── index.js         # Express server entry
 ```
 #
+
+**⚡ Getting Started**
+Prerequisites
+
+Node.js (>= 18.x recommended)
+
+MongoDB Atlas or local instance
+
+AI API key (e.g., OpenAI API key)
+
+#
+**Installation**
+```
+git clone https://github.com/riaanHarwood/Mini-AI-App-Builder-Portal.git
+cd Mini-AI-App-Builder-Porta
+```
+
+**Install dependencies for both frontend and backend:**
+```
+cd client
+npm install
+
+cd ../server
+npm install
+```
