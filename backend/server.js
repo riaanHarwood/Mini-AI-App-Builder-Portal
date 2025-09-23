@@ -9,11 +9,19 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import cors from "cors";
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
+import aiRoutes from "./aiRoutes.js";
+
+
 
 dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
+//OpenAI AI API integration
+// Use the AI routes
+app.use("/api/ai", aiRoutes);
 
 
 // Connect App to MongoDB server 
@@ -31,6 +39,7 @@ const userSchema = new mongoose.Schema({
   password: String,
 });
 const User = mongoose.model("User", userSchema);
+
 
 
 // Registeration Page
