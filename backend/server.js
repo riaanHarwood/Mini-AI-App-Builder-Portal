@@ -1,4 +1,8 @@
 // backend/server.js
+//Note to self: 
+//The server.js file is the backend production of the app. This store all the functionality and logic  
+//for the app + API keys (using OpenAI GPT4o + DALL·E 3) --> refer to aiRoutes.js 
+
 import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
@@ -11,7 +15,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB server 
+
+// Connect App to MongoDB server 
+//Note: 
+//Mongoose is a library for MongoDB and Node.JS 
+//It provides a solution for modelling data and connecting the app to MongoDB database 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("Connected to MongoDB"))
   .catch(err => console.error("MongoDB connection error: please try again later", err));
@@ -24,7 +32,8 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model("User", userSchema);
 
-// Register Page
+
+// Registeration Page
 app.post("/api/register", async (req, res) => {
   try { //variables to check 
     const { name, email, password, confirmPassword } = req.body;
@@ -52,7 +61,7 @@ app.post("/api/register", async (req, res) => {
   }
 });
 
-// Login
+// Login Page
 //api route for verifying user authentication 
 app.post("/api/login", async (req, res) => {
   const { email, password } = req.body;
