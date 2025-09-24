@@ -19,6 +19,8 @@ router.post("/generate", async (req, res) => {
   try {
     const { prompt } = req.body;
 
+    
+
     const response = await client.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [{ role: "user", content: prompt }],
@@ -58,3 +60,5 @@ router.post("/generate-image", async (req, res) => {
 
 
 export default router;
+
+

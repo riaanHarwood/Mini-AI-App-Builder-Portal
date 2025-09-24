@@ -42,6 +42,13 @@ const User = mongoose.model("User", userSchema);
 
 
 
+// Chat Page
+// Need to implement logic here still 
+
+
+
+
+
 // Registeration Page
 app.post("/api/register", async (req, res) => {
   try { //variables to check 
@@ -104,3 +111,7 @@ app.get("/api/me", (req, res) => {
 app.listen(5050, () => console.log("🚀 Backend running on port 5050"));
 
 
+// For Testing Purposes** 
+app.get("/", (req, res) => {
+  res.send("🚀 Backend is running!");
+});
