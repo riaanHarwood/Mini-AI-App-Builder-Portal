@@ -7,7 +7,7 @@ dotenv.config();
 const router = express.Router();
 
 // Note: This initialize's OpenAI client
-const client = new OpenAI({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
@@ -18,8 +18,6 @@ const client = new OpenAI({
 router.post("/generate", async (req, res) => {
   try {
     const { prompt } = req.body;
-
-    
 
     const response = await client.chat.completions.create({
       model: "gpt-4o-mini",
@@ -38,25 +36,38 @@ router.post("/generate", async (req, res) => {
 
 // Image generation route: DALL·E 3
 // Image Generation 
+// Image generation route: DALL·E 3
 
 router.post("/generate-image", async (req, res) => {
   try {
     const { prompt } = req.body;
 
-    const response = await client.images.generate({
-      model: "gpt-image-1", // DALL·E 3
+    if (!prompt) {
+      return res.status(400).json({ error: "Prompt is required" });
+    }
+
+    // Call OpenAI image API — URL is returned by default
+    const result = await openai.images.generate({
+      model: "gpt-image-1",
       prompt,
-      size: "1024x1024" 
+      size: "1024x1024",
     });
 
-    res.json({
-      imageUrl: response.data[0].url,
-    });
+    console.log("OpenAI response:", result);
+
+    if (result && result.data && result.data.length > 0) {
+      return res.json({ imageUrl: result.data[0].url });
+    } else {
+      return res.status(500).json({ error: "Image failed to generate" });
+    }
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Image failed to generate" });
+    console.error("Error generating image:", error);
+    return res.status(500).json({
+      error: error.message || "Something went wrong generating the image",
+    });
   }
 });
+
 
 
 export default router;
