@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
 import Chat from "./pages/Chat";
 
+
 function App() {
   const [isAuth, setIsAuth] = useState(!!localStorage.getItem("token"));
 

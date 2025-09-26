@@ -15,16 +15,19 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
 // Use AI routes
 app.use("/api/ai", aiRoutes);
 
-// MongoDB connection
+
+// MongoDB connection - URI in -> .env file
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
   .catch((err) =>
     console.error("❌ MongoDB connection error: please try again later", err)
   );
+
 
 // Schema
 const userSchema = new mongoose.Schema({
@@ -34,7 +37,8 @@ const userSchema = new mongoose.Schema({
 });
 const User = mongoose.model("User", userSchema);
 
-// Registration
+
+// User Account Registration 
 app.post("/api/register", async (req, res) => {
   try {
     const { name, email, password, confirmPassword } = req.body;
@@ -63,6 +67,7 @@ app.post("/api/register", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 // Login
 app.post("/api/login", async (req, res) => {

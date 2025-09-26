@@ -37,7 +37,7 @@ router.post("/generate-image", async (req, res) => {
     if (!prompt) return res.status(400).json({ error: "Prompt is required" });
 
     const result = await openai.images.generate({
-      model: "dall-e-3",
+      model: "dall-e-3",  //using dall-e 3 model as suggested online
       prompt,
       size: "1024x1024",
     });
