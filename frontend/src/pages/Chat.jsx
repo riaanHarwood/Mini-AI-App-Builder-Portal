@@ -70,6 +70,14 @@ export default function Chat() {
                   Help
                 </button>
 
+                 <button
+                  onClick={() => navigate("/profile")}
+                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-white hover:bg-white/10 transition"
+                >
+                  <HelpCircle className="w-4 h-4 text-orange-400" />
+                  Profile
+                </button>
+
                 {user ? (
                   <button
                     onClick={handleSignOut}
@@ -106,7 +114,7 @@ export default function Chat() {
 
           {/* Settings */}
           <button
-            onClick={() => setActive("settings")}
+            onClick={() => navigate("/settings")}
             className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-white/10 transition"
           >
             <Settings className="w-5 h-5 text-orange-400" />
