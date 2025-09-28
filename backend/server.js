@@ -31,7 +31,8 @@ mongoose
 
 // Schema
 const userSchema = new mongoose.Schema({
-  name: String,
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   email: { type: String, unique: true },
   password: String,
 });
@@ -41,30 +42,42 @@ const User = mongoose.model("User", userSchema);
 // User Account Registration 
 app.post("/api/register", async (req, res) => {
   try {
-    const { name, email, password, confirmPassword } = req.body;
+    const { firstName, lastName, email, password, confirmPassword } = req.body;
 
-    if (!name || !email || !password || !confirmPassword) {
+    // Validate inputs
+    if (!firstName || !lastName || !email || !password || !confirmPassword) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
     if (password !== confirmPassword) {
       return res
         .status(400)
-        .json({ error: "Passwords do not match, please re-enter the password" });
+        .json({ error: "Passwords do not match" });
     }
 
+    // Check if email already exists BEFORE hashing or creating user
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: "Email is already registered" });
     }
 
+    // Hash password and create user
     const hashedPassword = await bcrypt.hash(password, 10);
-    await User.create({ name, email, password: hashedPassword });
 
-    res.status(201).json({ message: "User registered successfully" });
+    // Use try/catch only around User.create to catch MongoDB errors separately
+    try {
+      await User.create({ firstName, lastName, email, password: hashedPassword });
+      return res.status(201).json(
+        { message: "User registered successfully" },
+      );
+    } catch (mongoErr) {
+      console.error("❌ MongoDB error during registration:", mongoErr);
+      return res.status(500).json({ error: "Failed to create user" });
+    }
+
   } catch (err) {
     console.error("❌ Registration error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
 
@@ -83,16 +96,24 @@ app.post("/api/login", async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(401).json({ error: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-    res.json({ token });
+    // Return token AND user info
+    res.json({ 
+      token,
+      user: {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+      },
+    });
   } catch (err) {
     console.error("❌ Login error:", err);
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 
 // Token verification
 app.get("/api/me", (req, res) => {

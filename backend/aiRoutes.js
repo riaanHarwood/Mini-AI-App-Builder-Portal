@@ -12,7 +12,7 @@ const openai = new OpenAI({
 });
 
 
-// ---- FOR TEXT GENERATION ----
+// ---- FOR TEXT GENERATION ---- //
 router.post("/generate", async (req, res) => {
   try {
     const { prompt } = req.body;
@@ -30,7 +30,7 @@ router.post("/generate", async (req, res) => {
   }
 });
 
-// ---- FOR IMAGE GENERATION ----
+// ---- FOR IMAGE GENERATION ---- //
 router.post("/generate-image", async (req, res) => {
   try {
     const { prompt } = req.body;
