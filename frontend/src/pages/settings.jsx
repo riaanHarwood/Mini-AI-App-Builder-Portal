@@ -10,11 +10,11 @@ export default function Settings() {
       
       {/* Back Button */}
       <button
-        onClick={() => navigate("/chat")}
-        className="absolute top-4 left-4 w-12 h-12 flex items-center justify-center bg-orange-600 text-white rounded-full hover:bg-orange-500 transition"
-        >
-        &larr;
-    </button>
+          onClick={() => navigate("/chat")}
+          className="absolute top-4 left-4 w-12 h-12 flex items-center justify-center bg-orange-600 text-white rounded-full hover:bg-orange-500 transition"
+          >
+          &larr;
+      </button>
 
       {/* Page Title */}
       <h1 className="text-4xl sm:text-6xl leading-tight sm:leading-snug font-light bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent text-center mb-8">
@@ -48,7 +48,7 @@ export default function Settings() {
           {activeTab === "account" && (
             <div>
               <h2 className="text-5xl font-semibold mb-15 text-center">Account Settings</h2>
-              <ul className="space-y-10 text-3xl text-left">
+              <ul className="space-y-10 text-2xl text-left">
                 <li>Update profile information</li>
                 <li>Change password</li>
                 <li>Linked accounts</li>
@@ -60,7 +60,7 @@ export default function Settings() {
           {activeTab === "privacy" && (
             <div>
               <h2 className="text-5xl font-semibold mb-15 text-center">Privacy & Security</h2>
-              <ul className="space-y-10 text-3xl text-left">
+              <ul className="space-y-10 text-2xl text-left">
                 <li>Manage data & permissions</li>
                 <li>Two-factor authentication</li>
                 <li>Clear chat history</li>
@@ -72,7 +72,7 @@ export default function Settings() {
           {activeTab === "notifications" && (
             <div>
               <h2 className="text-5xl font-semibold mb-15 text-center">Notifications</h2>
-              <ul className="space-y-10 text-3xl text-left">
+              <ul className="space-y-10 text-2xl text-left">
                 <li>Email notifications</li>
                 <li>Push notifications</li>
                 <li>Feature updates</li>
@@ -84,7 +84,7 @@ export default function Settings() {
           {activeTab === "support" && (
             <div>
               <h2 className="text-5xl font-semibold mb-15 text-center">FAQ’s & Support</h2>
-              <ul className="space-y-10 text-3xl text-left">
+              <ul className="space-y-10 text-2xl text-left">
                 <li>Browse FAQ’s</li>
                 <li>Contact support</li>
                 <li>Report a bug</li>
