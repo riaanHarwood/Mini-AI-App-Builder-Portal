@@ -56,7 +56,7 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-neutral-1000 to-orange-800">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-neutral-1000 to-orange-500">
       <form
         onSubmit={handleSubmit}
         className="bg-black/50 p-8 rounded-xl shadow-lg space-y-6 w-full max-w-sm border border-gray-500"

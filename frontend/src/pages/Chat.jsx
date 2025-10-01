@@ -185,7 +185,7 @@ export default function Chat() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-neutral-800 to-orange-800 flex">
+    <div className="min-h-screen bg-gradient-to-br from-black via-neutral-700 to-orange-500 flex">
       {/* Sidebar */}
       <div className="w-64 bg-black/30 backdrop-blur-md p-6 flex flex-col justify-between border-r border-white/10">
         <div className="space-y-6 pl-6">

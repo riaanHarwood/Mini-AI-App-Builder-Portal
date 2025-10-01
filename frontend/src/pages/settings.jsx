@@ -6,12 +6,12 @@ export default function Settings() {
   const navigate = useNavigate(); // initialize navigate
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-neutral-800 to-orange-800 flex flex-col items-center justify-center p-4 relative">
+    <div className="min-h-screen bg-gradient-to-br from-black via-neutral-800 to-orange-500 flex flex-col items-center justify-center p-4 relative">
       
       {/* Back Button */}
       <button
           onClick={() => navigate("/chat")}
-          className="absolute top-4 left-4 w-12 h-12 flex items-center justify-center bg-orange-600 text-white rounded-full hover:bg-orange-500 transition"
+          className="absolute top-4 left-4 w-12 h-12 flex items-center justify-center bg-orange-600 text-white rounded-full hover:bg-orange-500 transition border border-white"
           >
           &larr;
       </button>
@@ -20,7 +20,7 @@ export default function Settings() {
       <h1 className="text-4xl sm:text-6xl leading-tight sm:leading-snug font-light bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent text-center mb-8">
         Settings
     </h1>
-      <div className="flex w-full max-w-5xl bg-neutral-900/60 rounded-2xl shadow-lg overflow-hidden min-h-[500px]">
+      <div className="flex w-full max-w-5xl bg-neutral-950/60 rounded-2xl shadow-lg overflow-hidden min-h-[500px]">
         {/* Sidebar */}
         <div className="w-1/4 flex flex-col border-r border-neutral-700 space-y-5">
           {[

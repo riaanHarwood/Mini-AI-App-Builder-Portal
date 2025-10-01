@@ -39,7 +39,7 @@ export default function Help() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-neutral-800 to-orange-800 flex flex-col items-center justify-start p-6 gap-15">
+    <div className="min-h-screen bg-gradient-to-br from-black via-neutral-800 to-orange-500 flex flex-col items-center justify-start p-6 gap-15">
       <h1 className="text-6xl sm:text-7xl font-light bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent text-center">
         Help & FAQ’s
       </h1>
@@ -47,7 +47,7 @@ export default function Help() {
       {/* Back Button */}
       <button
             onClick={() => navigate("/chat")}
-            className="absolute top-4 left-4 w-12 h-12 flex items-center justify-center bg-orange-600 text-white rounded-full hover:bg-orange-500 transition"
+            className="absolute top-4 left-4 w-12 h-12 flex items-center justify-center bg-orange-600 text-white rounded-full hover:bg-orange-500 transition border border-white"
              >
          &larr;
       </button>
@@ -56,7 +56,7 @@ export default function Help() {
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className="bg-neutral-900/70 rounded-xl shadow-lg p-4 cursor-pointer"
+            className="bg-neutral-800/70 rounded-xl shadow-lg p-4 cursor-pointer"
             onClick={() => toggleFAQ(index)}
           >
             {/* Question row */}

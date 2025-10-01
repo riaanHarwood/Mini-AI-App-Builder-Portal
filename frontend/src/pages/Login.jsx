@@ -32,11 +32,11 @@ export default function Login({ onLogin }) {
   };
 
   return (      
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-neutral-1000 to-orange-800 relative">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black via-neutral-1000 to-orange-500 relative">
       {/* Top-right New Chat button */}
       <button
         onClick={() => navigate("/chat")}
-        className="absolute top-6 right-6 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg shadow-md transition"
+        className="absolute top-6 right-6 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg shadow-md transition border border-white"
       >
         New Chat
       </button>

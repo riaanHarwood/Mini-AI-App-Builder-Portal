@@ -75,11 +75,11 @@ const navigate = useNavigate();
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-neutral-800 to-orange-800 flex flex-col items-center justify-start p-6 gap-8">
+    <div className="min-h-screen bg-gradient-to-br from-black via-neutral-800 to-orange-500 flex flex-col items-center justify-start p-6 gap-8">
       {/* Back Button */}
       <button
         onClick={() => navigate("/chat")}
-        className="absolute top-4 left-4 w-12 h-12 flex items-center justify-center bg-orange-600 text-white rounded-full hover:bg-orange-500 transition"
+        className="absolute top-4 left-4 w-12 h-12 flex items-center justify-center bg-orange-600 text-white rounded-full hover:bg-orange-500 transition border border-white"
       >
         &larr;
       </button>
@@ -200,7 +200,7 @@ const navigate = useNavigate();
           ) : (
             <button
               onClick={() => setEditing(true)}
-              className="px-6 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-500 transition"
+              className="px-6 py-2 bg-orange-600 text-white rounded-lg border border-white hover:bg-orange-500 transition"
             >
               Edit
             </button>
