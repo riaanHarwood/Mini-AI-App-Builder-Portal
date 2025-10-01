@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Chat() {
+  const navigate = useNavigate();
   const [active, setActive] = useState("chat");
   const [showProfileOptions, setShowProfileOptions] = useState(false);
   const [user, setUser] = useState(null);
@@ -13,7 +14,6 @@ export default function Chat() {
   const [currentChatId, setCurrentChatId] = useState(null);
   const [showWelcome, setShowWelcome] = useState(true);
 
-  const navigate = useNavigate();
   const dropdownRef = useRef(null);
   const messagesEndRef = useRef(null);
 
@@ -236,34 +236,45 @@ export default function Chat() {
           </div>
         </div>
 
-        {/* Profile & Settings */}
-        <div className="space-y-6 pl-6 relative" ref={dropdownRef}>
-          <div className="relative">
-            {showProfileOptions && (
-              <div className="absolute bottom-12 left-0 w-40 bg-neutral-900 rounded-lg shadow-lg border border-white/10 z-10">
-                <button
-                  onClick={() => {
-                    setShowProfileOptions(false);
-                    navigate("/help");
-                  }}
-                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-white hover:bg-white/10 transition"
-                >
-                  <HelpCircle className="w-4 h-4 text-orange-400" />
-                  Help
-                </button>
+      {/* Profile & Settings */}
+      <div className="space-y-6 pl-6 relative" ref={dropdownRef}>
+        {!user ? (
+          // Only show Sign In button when no user
+          <button
+            onClick={() => navigate("/login")}
+            className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-white/10 transition"
+          >
+            <User className="w-5 h-5 text-orange-400" />
+            <span className="text-white">Sign In</span>
+          </button>
+        ) : (
+          // Show Profile & Settings when user is signed in
+          <>
+            <div className="relative">
+              {showProfileOptions && (
+                <div className="absolute bottom-12 left-0 w-40 bg-neutral-900 rounded-lg shadow-lg border border-white/10 z-10">
+                  <button
+                    onClick={() => {
+                      setShowProfileOptions(false);
+                      navigate("/help");
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-white hover:bg-white/10 transition"
+                  >
+                    <HelpCircle className="w-4 h-4 text-orange-400" />
+                    Help
+                  </button>
 
-                <button
-                  onClick={() => {
-                    setShowProfileOptions(false);
-                    navigate("/profile");
-                  }}
-                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-white hover:bg-white/10 transition"
-                >
-                  <User className="w-4 h-4 text-orange-400" />
-                  Profile
-                </button>
+                  <button
+                    onClick={() => {
+                      setShowProfileOptions(false);
+                      navigate("/profile");
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-white hover:bg-white/10 transition"
+                  >
+                    <User className="w-4 h-4 text-orange-400" />
+                    Profile
+                  </button>
 
-                {user ? (
                   <button
                     onClick={handleSignOut}
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm text-white hover:bg-white/10 transition"
@@ -271,40 +282,29 @@ export default function Chat() {
                     <LogOut className="w-4 h-4 text-orange-400" />
                     Sign Out
                   </button>
-                ) : (
-                  <button
-                    onClick={() => navigate("/login")}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-white hover:bg-white/10 transition"
-                  >
-                    <User className="w-4 h-4 text-orange-400" />
-                    Sign In
-                  </button>
-                )}
-              </div>
-            )}
+                </div>
+              )}
+
+              <button
+                onClick={() => setShowProfileOptions((prev) => !prev)}
+                className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-white/10 transition"
+              >
+                <User className="w-5 h-5 text-orange-400" />
+                <span className="text-white font-semibold">{user.firstName}</span>
+              </button>
+            </div>
 
             <button
-              onClick={() => setShowProfileOptions((prev) => !prev)}
+              onClick={() => navigate("/settings")}
               className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-white/10 transition"
             >
-              <User className="w-5 h-5 text-orange-400" />
-              {!user ? (
-                <span className="text-white">Profile</span>
-              ) : (
-                <span className="text-white font-semibold">{user.firstName}</span>
-              )}
+              <Settings className="w-5 h-5 text-orange-400" />
+              <span className="text-white">Settings</span>
             </button>
-          </div>
-
-          <button
-            onClick={() => navigate("/settings")}
-            className="flex items-center gap-3 px-3 py-2 rounded-xl hover:bg-white/10 transition"
-          >
-            <Settings className="w-5 h-5 text-orange-400" />
-            <span className="text-white">Settings</span>
-          </button>
-        </div>
+          </>
+        )}
       </div>
+    </div>
 
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col relative">
