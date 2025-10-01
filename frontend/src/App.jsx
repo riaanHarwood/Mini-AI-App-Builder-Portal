@@ -16,7 +16,7 @@ function App() {
     <Router>
       <Routes>
         {/* Default route - opens to Chat page initially */}
-        <Route path="/" element={<Chat />} />
+        <Route path="/" element={<Login />} />
 
         {/* Auth pages */}
         <Route path="/login" element={<Login onLogin={() => setIsAuth(true)} />} />
