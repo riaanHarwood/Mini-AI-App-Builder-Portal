@@ -1,5 +1,5 @@
 # Mini-AI-App-Builder-Portal
-A lightweight AI-powered app builder that allows users to describe their desired application with specific requirements. The portal leverages an AI API to capture inputs and automatically generates a basic mock UI based on the provided specifications.
+The Mini Ai App Builder Portal is a lightweight AI-powered platform that allows users to describe their desired application with specific requirements. The portal leverages an AI API using OpenAI GPT4o and DALL-E 3 to capture inputs and automatically generates a basic mock UI based on the provided specifications.
 
 
 This project showcases my ability to implement AI-driven requirement gathering and dynamic UI generation with **React, Node.js (Render)**, and **MongoDB**. 
