@@ -3,6 +3,7 @@ import { Plus, Settings, User, History, HelpCircle, LogOut } from "lucide-react"
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
 export default function Chat() {
   const navigate = useNavigate();
   const [active, setActive] = useState("chat");
