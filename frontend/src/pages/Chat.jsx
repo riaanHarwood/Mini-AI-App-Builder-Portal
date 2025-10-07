@@ -33,7 +33,7 @@ export default function Chat() {
       setMessages(prev => [...prev, loadingMsg]);
 
       try {
-        const res = await axios.post("http://localhost:5050/api/ai", { type, prompt: input });
+        const res = await axios.post("http://localhost:5050/api/ai/", { type, prompt: input });
         const data = res.data;
 
         // Remove the loading message
@@ -135,12 +135,14 @@ export default function Chat() {
                   <img src={msg.imageUrl} alt="Generated" className="rounded-lg" />
                 )}
 
-                {msg.type === "ui" && msg.code && (
-                  <LiveProvider code={msg.code}>
-                    <LivePreview className="border rounded-lg p-4 mt-2 bg-gray-50" />
-                    <LiveError className="text-red-500 mt-2" />
-                  </LiveProvider>
-                )}
+               {msg.type === "ui" && msg.code && (
+                  <div className="w-full">
+                    <LiveProvider code={msg.code} noInline>
+                      <LivePreview className="border rounded-lg p-4 mt-2 bg-gray-50" />
+                      <LiveError className="text-red-500 mt-2 whitespace-pre-wrap" />
+                    </LiveProvider>
+                  </div>
+                  )}
               </div>
             </div>
           ))}
