@@ -1,4 +1,3 @@
-// server.js
 import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
@@ -10,22 +9,30 @@ import aiRoutes from "./aiRoutes.js";
 dotenv.config();
 const app = express();
 
-// Middleware
-app.use(cors());
+// --- Middleware ---
+app.use(cors({
+  origin: process.env.CLIENT_URL || "http://localhost:5173",
+  credentials: true
+}));
 app.use(express.json());
 
-// Use AI routes
+// --- AI Routes ---
 app.use("/api/ai", aiRoutes);
 
-// MongoDB connection
+// --- MongoDB connection ---
+if (!process.env.MONGO_URI) {
+  console.error("❌ Missing MONGO_URI in environment");
+  process.exit(1);
+}
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ Connected to MongoDB"))
-  .catch((err) =>
-    console.error("❌ MongoDB connection error: please try again later", err)
-  );
+  .catch((err) => {
+    console.error("❌ MongoDB connection error:", err);
+    process.exit(1);
+  });
 
-// Schema
+// --- USER SCHEMA ---
 const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
@@ -78,6 +85,11 @@ app.post("/api/login", async (req, res) => {
     const match = await bcrypt.compare(password, user.password);
     if (!match) return res.status(401).json({ error: "Invalid credentials" });
 
+    if (!process.env.JWT_SECRET) {
+      console.error("❌ Missing JWT_SECRET in environment");
+      return res.status(500).json({ error: "Server misconfiguration" });
+    }
+
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
@@ -113,12 +125,10 @@ app.get("/api/me", (req, res) => {
   });
 });
 
-// --- NEW ROUTES FOR PROFILE PAGE ---
-
 // Get user profile by ID
 app.get("/api/users/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).select("-password"); // exclude password
+    const user = await User.findById(req.params.id).select("-password");
     if (!user) return res.status(404).json({ error: "User not found" });
     res.json(user);
   } catch (err) {
@@ -144,25 +154,11 @@ app.put("/api/users/update", async (req, res) => {
     const { firstName, lastName, email, phone, username, password, twoFactor, linkedAccounts } =
       req.body;
 
-    const updateData = {
-      firstName,
-      lastName,
-      email,
-      phone,
-      username,
-      twoFactor,
-      linkedAccounts,
-    };
+    const updateData = { firstName, lastName, email, phone, username, twoFactor, linkedAccounts };
 
-    // If password provided, hash it
-    if (password) {
-      updateData.password = await bcrypt.hash(password, 10);
-    }
+    if (password) updateData.password = await bcrypt.hash(password, 10);
 
-    const updatedUser = await User.findByIdAndUpdate(decoded.id, updateData, {
-      new: true,
-    }).select("-password");
-
+    const updatedUser = await User.findByIdAndUpdate(decoded.id, updateData, { new: true }).select("-password");
     res.json({ message: "✅ Profile updated", user: updatedUser });
   } catch (err) {
     console.error("❌ Update user error:", err);
@@ -170,7 +166,7 @@ app.put("/api/users/update", async (req, res) => {
   }
 });
 
-// --- ROOT TEST ROUTE ---
+// Root test route
 app.get("/", (req, res) => {
   res.send("🚀 Backend is running!");
 });
